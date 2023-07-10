@@ -87,7 +87,10 @@ function buy(id) {
 
 // Exercise 2
 function cleanCart() {
-  
+    cartList.splice(0);
+    document.getElementById("cart_list").innerHTML = " ";
+    document.getElementById("total_price").innerHTML = 0;
+    console.log("Clean Cart", cartList);  
 }
 
 // Exercise 3
