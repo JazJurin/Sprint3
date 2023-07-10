@@ -131,7 +131,21 @@ function generateCart() {
 // Exercise 5
 function applyPromotionsCart() {
   // Apply promotions to each item in the array "cart"
-
+  for (let i = 0; i < cart.length; i++) {
+    let product = cart[i];
+    if (product.name === "cooking oil" && product.quantity >= 3) {
+      product.subtotalWithDiscount = product.quantity * 10;
+    } else if (
+      product.name === "Instant cupcake mixture" &&
+      product.quantity >= 10
+    ) {
+      product.subtotalWithDiscount = (
+        (2 / 3) *
+        (product.price * product.quantity)
+      ).toFixed(2);
+    }
+  }
+  console.log(cart);
 }
 
 // Exercise 6
