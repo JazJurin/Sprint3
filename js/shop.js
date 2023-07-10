@@ -151,6 +151,49 @@ function applyPromotionsCart() {
 // Exercise 6
 function printCart() {
   // Fill the shopping cart modal manipulating the shopping cart dom
+  const cartList = document.getElementById("cart_list");
+  cartList.innerHTML = " ";
+
+  let totalPrice = 0;
+
+  for (let i = 0; i < cart.length; i++) {
+    let product = cart[i];
+    let row = document.createElement("tr");
+
+    const nameProduct = document.createElement("th");
+    nameProduct.textContent = product.name;
+    row.appendChild(nameProduct);
+
+    const priceProduct = document.createElement("th");
+    priceProduct.textContent = product.price;
+    row.appendChild(priceProduct);
+
+    const quantityProduct = document.createElement("td");
+    quantityProduct.textContent = product.quantity;
+    row.appendChild(quantityProduct);
+
+    const subtotalProduct = document.createElement("td");
+    subtotalProduct.textContent = (product.price * product.quantity).toFixed(2);
+    row.appendChild(subtotalProduct);
+
+    const subtotalWithDiscountProduct = document.createElement("td");
+    if (product.subtotalWithDiscount) {
+      subtotalWithDiscountProduct.textContent = product.subtotalWithDiscount;
+    } else {
+      subtotalWithDiscountProduct.textContent = "-";
+    }
+    row.appendChild(subtotalWithDiscountProduct);
+
+    cartList.appendChild(row);
+
+    if (product.subtotalWithDiscount) {
+      totalPrice += parseFloat(product.subtotalWithDiscount);
+    } else {
+      totalPrice += parseFloat((product.price * product.quantity).toFixed(2));
+    }
+  }
+
+  document.getElementById("total_price").innerHTML = totalPrice.toFixed(2);
 
 }
 
@@ -172,5 +215,10 @@ function removeFromCart(id) {
 }
 
 function open_modal() {
-  
+    console.log("Open Modal");
+    addToCart();
+    generateCart();
+    applyPromotionsCart();
+    printCart();
+   
 }
